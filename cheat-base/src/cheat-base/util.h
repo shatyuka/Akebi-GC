@@ -38,9 +38,13 @@ namespace util
 	int64_t GetCurrentTimeMillisec();
 
 	std::string GetModulePath(HMODULE hModule = nullptr);
+	std::string GetModulePathUTF8(HMODULE hModule = nullptr);
 
-	void SetCurrentPath(const std::filesystem::path& curren_path);
+	void SetCurrentPath(const std::filesystem::path& current_path);
 	std::filesystem::path GetCurrentPath();
+
+	void SetCurrentPathUTF8(const std::filesystem::path& current_path);
+	std::filesystem::path GetCurrentPathUTF8();
 
 	std::vector<std::string> StringSplit(const std::string& delimiter, const std::string& content);
 	std::string SplitWords(const std::string& value);

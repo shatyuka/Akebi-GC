@@ -15,6 +15,7 @@ void Run(HMODULE* phModule)
 {
 	ResourceLoader::SetModuleHandle(*phModule);
 	util::SetCurrentPath(util::GetModulePath(*phModule));
+	util::SetCurrentPathUTF8(util::GetModulePathUTF8(*phModule));
 
 	// Init config
 	config::Initialize((util::GetCurrentPath() / "cfg.json").string());

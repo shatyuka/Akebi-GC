@@ -69,6 +69,14 @@ namespace util
 		return std::filesystem::path(pathOut).parent_path().string();
 	}
 
+	std::string GetModulePathUTF8(HMODULE hModule /*= nullptr*/)
+	{
+		wchar_t pathOut[MAX_PATH] = {};
+		GetModuleFileNameW(hModule, pathOut, MAX_PATH);
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+		return conv.to_bytes(std::filesystem::path(pathOut).parent_path().wstring());
+	}
+
 	static std::filesystem::path _currentPath;
 	void SetCurrentPath(const std::filesystem::path& current_path)
 	{
@@ -78,6 +86,17 @@ namespace util
 	std::filesystem::path GetCurrentPath()
 	{
 		return _currentPath;
+	}
+
+	static std::filesystem::path _currentPathUTF8;
+	void SetCurrentPathUTF8(const std::filesystem::path& current_path)
+	{
+		_currentPathUTF8 = current_path;
+	}
+
+	std::filesystem::path GetCurrentPathUTF8()
+	{
+		return _currentPathUTF8;
 	}
 
 	std::optional<std::string> SelectDirectory(const char* title)
